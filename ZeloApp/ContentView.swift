@@ -2,6 +2,8 @@
 //  ContentView.swift
 //  ZeloApp
 // oi
+// teste alysson
+// alynho
 //  Created by Maria Letícia Isabel Gonçalves  on 25/06/26.
 //
 
@@ -14,6 +16,9 @@ struct ContentView: View {
                 .imageScale(.large)
                 .foregroundStyle(.tint)
             Text("Hello, world!")
+            
+            // bel aqui
+            
         }
         .padding()
         // beloii
