@@ -16,6 +16,9 @@ struct ContentView: View {
                 .imageScale(.large)
                 .foregroundStyle(.tint)
             Text("Hello, world!")
+            
+            // bel aqui
+            
         }
         .padding()
         // beloii
