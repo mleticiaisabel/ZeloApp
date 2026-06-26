@@ -23,7 +23,7 @@ struct TelaDeBoasVindas: View {
                 LinearGradient(
                     colors: [
                         Color.green.opacity(0.60),
-                        Color.green.opacity(0.15),
+                        Color.green.opacity(0.1),
                         Color(.clear)],
                     startPoint: .top,
                     endPoint: .center
@@ -32,7 +32,7 @@ struct TelaDeBoasVindas: View {
                 
                 VStack (alignment: .leading) {
                     Spacer()
-                        .frame(height: 170)
+                        .frame(height: 190)
                     
                     VStack(alignment: .leading, spacing: 5) {
                         Text("Bem-vindo(a) ao")
@@ -41,83 +41,98 @@ struct TelaDeBoasVindas: View {
                             .foregroundColor(.black)
                             .bold()
                         
-                        Text("ZÉllo")
+                        Text("Zéllo")
                             .font(.largeTitle)
                             .foregroundColor(.green)
                             .bold()
                     }
                     Spacer()
-                        .frame(height: 35)
+                        .frame(height: 40)
                     
-                    VStack(spacing: 30) {
+                    VStack(spacing: 40) {
                         
                         HStack (alignment: .top, spacing: 20) {
                             Image(systemName: "heart.text.clipboard.fill")
-                                .font(Font.system(size: 30, weight: .bold, design: .rounded))
+                                .font(Font.system(size: 23, weight: .bold, design: .rounded))
                                 .foregroundColor(.green)
                                 .font(.headline)
+                                .frame(width: 30, height: 50)
                             
-                            //                                .frame(width: 80, height: 80)
                             
                             VStack(alignment: .leading, spacing: 6) {
                                 
                                 Text("Tudo sobre sua criança")
-                                    .font(.title2)
+                                    .font(.title3)
                                     .bold()
                                 
                                 Text("Medicamentos, alergias e cuidados importantes em um só lugar.")
                                     .font(.body)
                                     .foregroundColor(.secondary)
-                                    .bold()
-                                //                                        .lineSpacing()
+//                                    .bold()
                                 
                             }
                         }
                         
                         HStack (alignment: .top, spacing: 20) {
                             Image(systemName: "figure.and.child.holdinghands")
-                                .font(Font.system(size: 30, weight: .bold, design: .rounded))
+                                .font(Font.system(size: 23, weight: .bold, design: .rounded))
                                 .foregroundColor(.green)
                                 .font(.headline)
-                            
-                            //                                .frame(width: 80, height: 80)
+                                .frame(width: 30, height: 50)
                             
                             VStack(alignment: .leading, spacing: 6) {
                                 
                                 Text("Cuidado compartilhado")
-                                    .font(.title2)
+                                    .font(.title3)
                                     .bold()
                                 
                                 Text("Mantenha familiares e responsáveis sempre informados.")
                                     .font(.body)
                                     .foregroundColor(.secondary)
-                                    .bold()
-                                //                                        .lineSpacing()
+//                                    .bold()
+                                
                             }
                         }
                         HStack (alignment: .top, spacing: 20) {
                             Image(systemName: "shield.righthalf.filled")
-                                .font(Font.system(size: 30, weight: .bold, design: .rounded))
+                                .font(Font.system(size: 23, weight: .bold, design: .rounded))
                                 .foregroundColor(.green)
                                 .font(.headline)
-                            
-                            //                                .frame(width: 80, height: 80)
+                                .frame(width: 30, height: 50)
                             
                             VStack(alignment: .leading, spacing: 6) {
                                 
                                 Text("Mais segurança no dia a dia")
-                                    .font(.title2)
+                                    .font(.title3)
                                     .bold()
                                 
                                 Text("Reduz riscos causados pela falta de informação e cuide com mais confiança.")
                                     .font(.body)
                                     .foregroundColor(.secondary)
-                                    .bold()
-                                //                                        .lineSpacing()
-                            }}
+//                                    .bold()
+                            }
+                        }
                     }
+                    Spacer ()
+                    
+                    Button{
+                        EntrarNoApp = true
+                        
+                    } label: {
+                        
+                        Text("Começar")
+                            .font(.title3)
+                            .bold()
+                            .foregroundColor(.white)
+                            .padding(.vertical, 14)
+                            .padding(.horizontal, 124)
+                            .background(Color.green)
+                            .clipShape(Capsule())
+                    }
+//                    .buttonStyle(.plain)
+//                    .padding(.bottom)
                 }
-                
+                .padding(.horizontal, 35)
             }
             
         }
@@ -125,6 +140,7 @@ struct TelaDeBoasVindas: View {
     }
     
 }
+
 #Preview {
     TelaDeBoasVindas()
 }
