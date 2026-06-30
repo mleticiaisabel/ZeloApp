@@ -14,8 +14,6 @@ struct EntradaDoAppView: View {
                 .foregroundStyle(.tint)
             Text("Hello, world!")
             
-        
-            
         }
         .padding()
     }

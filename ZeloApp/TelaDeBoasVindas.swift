@@ -124,8 +124,8 @@ struct TelaDeBoasVindas: View {
                             .font(.title3)
                             .bold()
                             .foregroundColor(.white)
-                            .padding(.vertical, 14)
-                            .padding(.horizontal, 124)
+                            .padding(.vertical, 17)
+                            .padding(.horizontal, 119)
                             .background(Color.green)
                             .clipShape(Capsule())
                     }
