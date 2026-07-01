@@ -22,6 +22,7 @@ struct DoencaFormView: View {
                         .foregroundColor(.black)
                         .padding(12)
                         .background(Circle().fill(Color.white))
+                        .font(.headline)
                 }
             }
             .padding(.top, 20)
