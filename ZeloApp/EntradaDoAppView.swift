@@ -8,14 +8,27 @@ import SwiftUI
 
 struct EntradaDoAppView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        
+        ZStack {
+            LinearGradient(
+                colors: [
+                    Color.green.opacity(0.60),
+                    Color.green.opacity(0.1),
+                    Color(.clear)],
+                startPoint: .top,
+                endPoint: .center
+            )
+            .ignoresSafeArea()
             
+            VStack {
+                Image(systemName: "globe")
+                    .imageScale(.large)
+                    .foregroundStyle(.tint)
+                Text("Hello, world!")
+                
+            }
+            .padding()
         }
-        .padding()
     }
 }
 

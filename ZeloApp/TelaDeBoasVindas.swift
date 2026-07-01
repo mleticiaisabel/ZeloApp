@@ -38,7 +38,7 @@ struct TelaDeBoasVindas: View {
                         Text("Bem-vindo(a) ao")
                             .font(.largeTitle)
                             .fontWeight(.bold)
-                            .foregroundColor(.black)
+                            .foregroundColor(.primary)
                             .bold()
                         
                         Text("Zéllo")
