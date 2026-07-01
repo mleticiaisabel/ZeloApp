@@ -36,6 +36,16 @@ struct EntradaDoAppView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 19)
                 .padding(.top, -338)
+                .toolbar {
+                    
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                        Button {} label: {
+                            Image(systemName: "square.and.arrow.up")
+                                .foregroundColor(Color.green)
+                        }
+                    }
+                    
+                }
             }
         }
     }
