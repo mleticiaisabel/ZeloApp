@@ -6,13 +6,62 @@
 //
 
 import SwiftUI
-
-struct Medicamento: View {
+ 
+struct MedicamentosFormView: View {
+    @Environment(\.dismiss) private var dismiss
+    @State private var nomeMedicamentos: String = ""
+ 
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading, spacing: 20) {
+            HStack {
+                Spacer()
+                Image(systemName: "pills.fill")
+                    .font(.system(size: 80))
+                    .foregroundColor(.indigo)
+                    .padding(20)
+               Spacer()
+            }
+            .overlay(alignment: .topTrailing) {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "xmark")
+                        .foregroundColor(.black)
+                        .padding(12)
+                        .background(Circle().fill(Color.white))
+                }
+            }
+            .padding(.top, 20)
+ 
+            Text("Nome do Medicamento")
+                .font(.title.bold())
+ 
+            TextField("Ex.: Dipirona, insulina, pomada...", text: $nomeMedicamentos)
+                .padding()
+                .background(Color(.systemGray5))
+                .cornerRadius(25)
+ 
+            Spacer()
+ 
+            Button {
+
+            } label: {
+                Text("Seguinte")
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.green)
+                    .cornerRadius(25)
+            }
+        }
+        .padding()
+       
     }
 }
-
+ 
 #Preview {
-    Medicamento()
+    NavigationStack {
+        MedicamentosFormView()
+    }
 }
