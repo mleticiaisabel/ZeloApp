@@ -38,7 +38,7 @@ struct TelaDeBoasVindas: View {
                         Text("Bem-vindo(a) ao")
                             .font(.largeTitle)
                             .fontWeight(.bold)
-                            .foregroundColor(.black)
+                            .foregroundColor(.primary)
                             .bold()
                         
                         Text("Zéllo")
@@ -124,8 +124,8 @@ struct TelaDeBoasVindas: View {
                             .font(.title3)
                             .bold()
                             .foregroundColor(.white)
-                            .padding(.vertical, 14)
-                            .padding(.horizontal, 124)
+                            .padding(.vertical, 17)
+                            .padding(.horizontal, 119)
                             .background(Color.green)
                             .clipShape(Capsule())
                     }

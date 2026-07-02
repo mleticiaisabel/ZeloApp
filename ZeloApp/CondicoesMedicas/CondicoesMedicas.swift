@@ -29,6 +29,8 @@ struct CondicaoFormView: View {
                         .foregroundColor(.black)
                         .padding(12)
                         .background(Circle().fill(Color.white))
+                        .glassEffect(.regular.interactive(), in: Circle())
+
                 }
             }
             .padding(.top, 20)
