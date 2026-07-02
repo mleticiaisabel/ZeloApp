@@ -23,6 +23,8 @@ struct DoencaFormView: View {
                         .padding(12)
                         .background(Circle().fill(Color.white))
                         .font(.headline)
+                        .glassEffect(.regular.interactive(), in: Circle())
+
                 }
             }
             .padding(.top, 20)
