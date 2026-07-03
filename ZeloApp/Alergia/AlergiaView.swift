@@ -8,60 +8,73 @@
 import SwiftUI
  
 struct AlergiasView: View {
-    @Environment(\.dismiss) private var dismiss
+    @Environment(\.dismiss) var dismiss
     @State private var nomeAlergias: String = ""
+    @State private var entrarNaLista = false
  
+    
+    
+    
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            HStack {
-                Spacer()
-                Image(systemName: "allergens")
-                    .font(.system(size: 80))
-                    .foregroundColor(.red)
-                    .padding(20)
-               Spacer()
-            }
-            .overlay(alignment: .topTrailing) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "xmark")
-                        .foregroundColor(.black)
-                        .padding(12)
-                        .background(Circle().fill(Color.white))
+        
+        NavigationStack {
+            HStack{
+                VStack(alignment: .leading) {
+                    HStack {
+                        Spacer()
+                        Image(systemName: "allergens")
+                            .font(.system(size: 70))
+                            .foregroundColor(.red)
+                            .padding(20)
+                        Spacer()
+                    }
+                    
+                    .padding(.top, 20)
+                    
+                    Text("Nome da\nAlergia")
+                        .font(.title2)
+                        .bold()
+                        .foregroundStyle(.primary)
+                        .padding(.horizontal, 19)
+                        .padding(.top, 4)
+                    
+                    TextField("Ex.: Poeira", text: $nomeAlergias)
+                        .padding()
+                        .background(Color(.systemGray5))
+//                        .cornerRadius(25)
+                        .clipShape(Capsule())
+                    
+                    Spacer()
+                    
+                    Button {
+                        entrarNaLista = true
+                    } label: {
+                        Text("Seguinte")
+                            .font(.title3)
+                            .bold()
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 17)
+                            .background(nomeAlergias.isEmpty ? Color.gray:Color.green)
+                            .clipShape(Capsule())
+                    }
+                    .disabled(nomeAlergias.isEmpty)
                 }
-            }
-            .padding(.top, 20)
- 
-            Text("Nome da Alergia")
-                .font(.title.bold())
- 
-            TextField("Ex.: Amendoim, camarão, poeira...", text: $nomeAlergias)
-                .padding()
-                .background(Color(.systemGray5))
-                .cornerRadius(25)
- 
-            Spacer()
- 
-            Button {
-
-            } label: {
-                Text("Seguinte")
-                    .fontWeight(.semibold)
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.green)
-                    .cornerRadius(25)
+                .toolbar{
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(action:  {
+                            dismiss()
+                        }) { Label ("", systemImage: "xmark")
+                            
+                        }
+                    }
+                }
+                .padding(.horizontal, 35)
             }
         }
-        .padding()
-       
     }
 }
- 
 #Preview {
-    NavigationStack {
-        AlergiasView()
-    }
+    AlergiasView()
 }
+
