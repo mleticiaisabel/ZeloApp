@@ -22,7 +22,7 @@ struct DoencasView: View {
                         Spacer()
                         Image(systemName: "cross.case.fill")
                             .font(.system(size: 70))
-                            .foregroundColor(.indigo)
+                            .foregroundColor(.orange)
                             .padding(20)
                         Spacer()
                     }

@@ -30,7 +30,7 @@ struct CategoriaItem: Identifiable, Hashable {
 let minhasCategorias = [
     CategoriaItem(titulo: "Medicamento", descricao: "Cadastre medicamentos, doses e horários para acompanhar o tratamento.", icone: "pills.fill", corIcone: .indigo, destino: .medicamentos),
     CategoriaItem(titulo: "Alergia", descricao: "Registre alergias, reações e orientações importantes para o cuidado.", icone: "allergens", corIcone: .red, destino: .alergias),
-    CategoriaItem(titulo: "Condições", descricao: "Adicione condições físicas, motoras ou de saúde que mereçam atenção.", icone: "figure.roll", corIcone: .brown, destino: .condicoes),
+    CategoriaItem(titulo: "Condição Médica", descricao: "Adicione condições físicas, motoras ou de saúde que mereçam atenção.", icone: "heart.text.square.fill", corIcone: .brown, destino: .condicoes),
     CategoriaItem(titulo: "Doenças", descricao: "Se a criança estiver doente, insira aqui o que está havendo...", icone: "thermometer.medium", corIcone: .orange, destino: .doencas),
     CategoriaItem(titulo: "Contatos de Emergências", descricao: "Cadastre pessoas que podem ser acionadas emsituações de emergência.", icone: "sos.circle.fill", corIcone: .red, destino: .contatosdeemergência)
 ]

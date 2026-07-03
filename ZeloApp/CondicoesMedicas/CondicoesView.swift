@@ -6,64 +6,72 @@
 //
 
 import SwiftUI
- 
+
 struct CondicoesView: View {
-    @Environment(\.dismiss) private var dismiss
-    @State private var nomeCondicao: String = ""
- 
+    
+    @Environment(\.dismiss) var dismiss
+    @State private var nomeMedicamentos: String = ""
+    @State private var entrarNaLista = false
+    
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            HStack {
-                Spacer()
-                Image(systemName: "brain.filled.head.profile")
-                    .font(.system(size: 80))
-                    .foregroundColor(.brown)
-                    .padding(20)
-               Spacer()
-            }
-            .overlay(alignment: .topTrailing) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "xmark")
-                        .foregroundColor(.black)
-                        .padding(12)
-                        .background(Circle().fill(Color.white))
-                        .glassEffect(.regular.interactive(), in: Circle())
-
+        
+        NavigationStack {
+            HStack{
+                VStack(alignment: .leading) {
+                    HStack {
+                        Spacer()
+                        Image(systemName: "heart.text.square.fill")
+                            .font(.system(size: 70))
+                            .foregroundColor(.brown)
+                            .padding(20)
+                        Spacer()
+                    }
+                    
+                    .padding(.top, 20)
+                    
+                    Text("Nome da\nCondição Médica")
+                        .font(.title2)
+                        .bold()
+                        .foregroundStyle(.primary)
+                        .padding(.horizontal, 19)
+                        .padding(.top, 4)
+                    
+                    TextField("Ex.: TDHA", text: $nomeMedicamentos)
+                        .padding()
+                        .background(Color(.systemGray5))
+//                        .cornerRadius(25)
+                        .clipShape(Capsule())
+                    
+                    Spacer()
+                    
+                    Button {
+                        entrarNaLista = true
+                    } label: {
+                        Text("Seguinte")
+                            .font(.title3)
+                            .bold()
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 17)
+                            .background(nomeMedicamentos.isEmpty ? Color.gray:Color.green)
+                            .clipShape(Capsule())
+                    }
+                    .disabled(nomeMedicamentos.isEmpty)
                 }
-            }
-            .padding(.top, 20)
- 
-            Text("Nome da Condição")
-                .font(.title.bold())
- 
-            TextField("Ex.: Motora, física, mental...", text: $nomeCondicao)
-                .padding()
-                .background(Color(.systemGray5))
-                .cornerRadius(25)
- 
-            Spacer()
- 
-            Button {
-
-            } label: {
-                Text("Seguinte")
-                    .fontWeight(.semibold)
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.green)
-                    .cornerRadius(25)
+                .toolbar{
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(action:  {
+                            dismiss()
+                        }) { Label ("", systemImage: "xmark")
+                            
+                        }
+                    }
+                }
+                .padding(.horizontal, 35)
             }
         }
-        .padding()
-       
     }
 }
- 
 #Preview {
-    NavigationStack {
-        CondicoesView()
-    }
+    CondicoesView()
 }
