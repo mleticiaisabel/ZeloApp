@@ -114,21 +114,21 @@ struct EntradaDoAppView: View {
 //
                         
                         Text("Acompanhamento")
-                            .font(.title3)
+                            .font(.title2)
                             .bold()
                             .foregroundStyle(.primary)
                             .padding(.horizontal, 19)
                         
-                        // Grid de Acompanhamento usando NavigationLink (diz com ajuda de ia essa parte)
+                        // Grid de Acompanhamento usando NavigationLink (fiz com ajuda de ia essa parte)
                         
                         LazyVGrid(columns: columns, spacing: 16) {
                             ForEach(minhasCategorias.prefix(4)) { item in
                                 NavigationLink(destination: viewParaCategoria(item.titulo)) {
-                                    VStack(alignment: .leading, spacing: 12) {
-                                        HStack(spacing: 6) {
+                                    VStack(alignment: .leading, spacing: 5) {
+                                        HStack(spacing: 4) {
                                             Image(systemName: item.icone)
                                                 .foregroundStyle(item.corIcone)
-                                                .font(.body)
+                                                .font(.headline)
                                                 .bold()
                                             
                                             Text(item.titulo.uppercased())
@@ -138,19 +138,12 @@ struct EntradaDoAppView: View {
                                         }
                                         
                                         Text(item.descricao)
-                                            .font(.system(size: 11))
+                                            .font(.system(size: 10))
                                             .foregroundStyle(.secondary)
                                             .multilineTextAlignment(.leading)
                                         
                                         Spacer()
-                                        
-                                        Text("0 ativos")
-                                            .font(.system(size: 10, weight: .bold))
-                                            .padding(.horizontal, 10)
-                                            .padding(.vertical, 4)
-                                            .background(Color.green.opacity(0.12))
-                                            .foregroundStyle(.green)
-                                            .clipShape(Capsule())
+            
                                     }
                                     .padding(16)
                                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -164,7 +157,7 @@ struct EntradaDoAppView: View {
                         .padding(.horizontal, 19)
                         
                         Text("Emergência")
-                            .font(.title3)
+                            .font(.title2)
                             .bold()
                             .foregroundStyle(.primary)
                             .padding(.horizontal, 19)
@@ -191,13 +184,13 @@ struct EntradaDoAppView: View {
                                     
                                     Spacer()
                                     
-                                    Text("0 ativos")
-                                        .font(.system(size: 10, weight: .bold))
-                                        .padding(.horizontal, 10)
-                                        .padding(.vertical, 4)
-                                        .background(Color.green.opacity(0.12))
-                                        .foregroundStyle(.green)
-                                        .clipShape(Capsule())
+//                                    Text("0 ativos")
+//                                        .font(.system(size: 10, weight: .bold))
+//                                        .padding(.horizontal, 10)
+//                                        .padding(.vertical, 4)
+//                                        .background(Color.green.opacity(0.12))
+//                                        .foregroundStyle(.green)
+//                                        .clipShape(Capsule())
                                 }
                                 .padding(16)
                                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -224,7 +217,7 @@ struct EntradaDoAppView: View {
             }
         }
     }
-
+// com ajuda de ia
     @ViewBuilder
     private func viewParaCategoria(_ titulo: String) -> some View {
         switch titulo.uppercased() {
