@@ -6,14 +6,12 @@
 //
 
 import SwiftUI
- 
+
 struct AlergiasView: View {
     @Environment(\.dismiss) var dismiss
     @State private var nomeAlergias: String = ""
     @State private var entrarNaLista = false
- 
-    
-    
+    @State private var irParaProximaTela: Bool = false
     
     var body: some View {
         
@@ -41,13 +39,13 @@ struct AlergiasView: View {
                     TextField("Ex.: Poeira", text: $nomeAlergias)
                         .padding()
                         .background(Color(.systemGray5))
-//                        .cornerRadius(25)
+                    // .cornerRadius(25)
                         .clipShape(Capsule())
                     
                     Spacer()
                     
                     Button {
-                        entrarNaLista = true
+                            irParaProximaTela = true
                     } label: {
                         Text("Seguinte")
                             .font(.title3)
@@ -62,7 +60,7 @@ struct AlergiasView: View {
                 }
                 .toolbar{
                     ToolbarItem(placement: .topBarTrailing) {
-                        Button(action:  {
+                        Button(action: {
                             dismiss()
                         }) { Label ("", systemImage: "xmark")
                             
@@ -70,11 +68,16 @@ struct AlergiasView: View {
                     }
                 }
                 .padding(.horizontal, 35)
+                .navigationDestination(isPresented: $irParaProximaTela) {
+                    AlergiaFormView(initialName: nomeAlergias)
+                }
             }
         }
     }
 }
-#Preview {
-    AlergiasView()
-}
 
+#Preview {
+    NavigationStack {
+        AlergiasView()
+    }
+}

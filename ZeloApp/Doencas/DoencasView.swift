@@ -10,8 +10,8 @@ import SwiftUI
 struct DoencasView: View {
     
     @Environment(\.dismiss) var dismiss
-    @State private var nomeMedicamentos: String = ""
-    @State private var entrarNaLista = false
+    @State private var nomeDoencas: String = ""
+    @State private var irParaProximaTela: Bool = false
     
     var body: some View {
         
@@ -36,16 +36,16 @@ struct DoencasView: View {
                         .padding(.horizontal, 19)
                         .padding(.top, 4)
                     
-                    TextField("Ex.: Diabete", text: $nomeMedicamentos)
+                    TextField("Ex.: Diabete", text: $nomeDoencas)
                         .padding()
                         .background(Color(.systemGray5))
-//                        .cornerRadius(25)
+                    //                        .cornerRadius(25)
                         .clipShape(Capsule())
                     
                     Spacer()
                     
                     Button {
-                        entrarNaLista = true
+                        irParaProximaTela = true
                     } label: {
                         Text("Seguinte")
                             .font(.title3)
@@ -53,10 +53,10 @@ struct DoencasView: View {
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 17)
-                            .background(nomeMedicamentos.isEmpty ? Color.gray:Color.green)
+                            .background(nomeDoencas.isEmpty ? Color.gray:Color.green)
                             .clipShape(Capsule())
                     }
-                    .disabled(nomeMedicamentos.isEmpty)
+                    .disabled(nomeDoencas.isEmpty)
                 }
                 .toolbar{
                     ToolbarItem(placement: .topBarTrailing) {
@@ -68,10 +68,15 @@ struct DoencasView: View {
                     }
                 }
                 .padding(.horizontal, 35)
+                .navigationDestination(isPresented: $irParaProximaTela) {
+                    InfodoencaFormView(initialName: nomeDoencas)
+                }
             }
         }
     }
 }
 #Preview {
-    DoencasView()
+    NavigationStack {
+        DoencasView()
+    }
 }

@@ -39,7 +39,7 @@ struct MedicamentoView: View {
                     TextField("Ex.: Dipirona", text: $nomeMedicamentos)
                         .padding()
                         .background(Color(.systemGray5))
-//                        .cornerRadius(25)
+                    // .cornerRadius(25)
                         .clipShape(Capsule())
                     
                     Spacer()
@@ -60,7 +60,7 @@ struct MedicamentoView: View {
                 }
                 .toolbar{
                     ToolbarItem(placement: .topBarTrailing) {
-                        Button(action:  {
+                        Button(action: {
                             dismiss()
                         }) { Label ("", systemImage: "xmark")
                             
@@ -75,4 +75,3 @@ struct MedicamentoView: View {
 #Preview {
     MedicamentoView()
 }
-
