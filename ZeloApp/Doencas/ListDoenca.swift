@@ -14,32 +14,59 @@ struct ListDoenca: View {
     var body: some View {
         
         NavigationStack {
-            
-            VStack(spacing: 5) {
-                Text("Ainda não há registros ativos.")
-                    .font(.title3)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.primary)
+            ZStack {
+                Color(uiColor: .systemGroupedBackground)
+                    .ignoresSafeArea()
                 
-            }
-            .navigationTitle("Doenças")
-            .navigationBarTitleDisplayMode(.automatic)
-            .toolbar {
-                
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        showPhotoPicker.toggle()
-                    } label: {
-                        Image(systemName: "plus")
-                            .foregroundColor(.green)
-                    }
+                VStack {
+                    LinearGradient(
+                        colors: [
+                            Color.orange.opacity(0.60),
+                            Color.orange.opacity(0.2),
+                            Color(.clear)
+                        ],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                    .frame(height: 240)
+                    Spacer()
                 }
+                .ignoresSafeArea()
                 
+                VStack(spacing: 5) {
+                    Image(systemName: "cross.case.fill")
+                        .resizable()
+                        .frame(width: 20, height: 20, alignment: .center)
+                        .foregroundColor(.orange)
+                        .bold()
+                    
+                    VStack(spacing: 5) {
+                        Text("Ainda não há registros ativos.")
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.primary)
+                        
+                    }
+                    .navigationTitle("Doenças")
+                    .navigationBarTitleDisplayMode(.automatic)
+                    .toolbar {
+                        
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button {
+                                showPhotoPicker.toggle()
+                            } label: {
+                                Image(systemName: "plus")
+                                    .foregroundColor(.green)
+                            }
+                        }
+                        
+                    }
+                    .sheet(isPresented: $showPhotoPicker) {
+                        DoencasView()
+                    }
+                    
+                }
             }
-            .sheet(isPresented: $showPhotoPicker) {
-                DoencasView()
-            }
-            
         }
     }
 }

@@ -55,7 +55,7 @@ struct EntradaDoAppView: View {
                             .bold()
                             .foregroundStyle(.primary)
                             .padding(.horizontal, 19)
-                            .padding(.top, 4)
+//
                         
                         // Card de dados pessoais
                         VStack(alignment: .leading, spacing: 16){
@@ -66,7 +66,7 @@ struct EntradaDoAppView: View {
                                         .resizable()
                                         .scaledToFill()
                                         .frame(width: 60, height: 60)
-                                        .clipShape(Circle())
+//                                        .clipShape(Circle())
                                     
                                 } else {
                                     ZStack {
@@ -111,15 +111,16 @@ struct EntradaDoAppView: View {
                         .background(Color(uiColor: .secondarySystemGroupedBackground))
                         .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
                         .padding(.horizontal, 19)
+//
                         
                         Text("Acompanhamento")
                             .font(.title3)
                             .bold()
                             .foregroundStyle(.primary)
                             .padding(.horizontal, 19)
-                            .padding(.top, 8)
                         
-                        // Grid de Acompanhamento usando NavigationLink
+                        // Grid de Acompanhamento usando NavigationLink (diz com ajuda de ia essa parte)
+                        
                         LazyVGrid(columns: columns, spacing: 16) {
                             ForEach(minhasCategorias.prefix(4)) { item in
                                 NavigationLink(destination: viewParaCategoria(item.titulo)) {
@@ -223,8 +224,7 @@ struct EntradaDoAppView: View {
             }
         }
     }
-    
-    // Função auxiliar para determinar a tela de destino com base no título
+
     @ViewBuilder
     private func viewParaCategoria(_ titulo: String) -> some View {
         switch titulo.uppercased() {
