@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
- 
+
 struct AlergiasFormView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var nomeAlergias: String = ""
- 
+    @State private var irParaProximaTela: Bool = false
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             HStack {
@@ -19,7 +20,7 @@ struct AlergiasFormView: View {
                     .font(.system(size: 80))
                     .foregroundColor(.red)
                     .padding(20)
-               Spacer()
+                Spacer()
             }
             .overlay(alignment: .topTrailing) {
                 Button {
@@ -32,19 +33,19 @@ struct AlergiasFormView: View {
                 }
             }
             .padding(.top, 20)
- 
+            
             Text("Nome da Alergia")
                 .font(.title.bold())
- 
+            
             TextField("Ex.: Amendoim, camarão, poeira...", text: $nomeAlergias)
                 .padding()
                 .background(Color(.systemGray5))
                 .cornerRadius(25)
- 
+            
             Spacer()
- 
+            
             Button {
-
+                irParaProximaTela = true
             } label: {
                 Text("Seguinte")
                     .fontWeight(.semibold)
@@ -54,12 +55,14 @@ struct AlergiasFormView: View {
                     .background(Color.green)
                     .cornerRadius(25)
             }
+            .disabled(nomeAlergias.trimmingCharacters(in: .whitespaces).isEmpty)
         }
         .padding()
-       
+        .navigationDestination(isPresented: $irParaProximaTela) {
+            AlergiaFormView(initialName: nomeAlergias)
+        }
     }
 }
- 
 #Preview {
     NavigationStack {
         AlergiasFormView()

@@ -1,9 +1,10 @@
 import SwiftUI
- 
+
 struct DoencaFormView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var nomeDoenca: String = ""
- 
+    @State private var irParaProximaTela: Bool = false
+
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             HStack {
@@ -23,24 +24,22 @@ struct DoencaFormView: View {
                         .padding(12)
                         .background(Circle().fill(Color.white))
                         .font(.headline)
-                        .glassEffect(.regular.interactive(), in: Circle())
-
                 }
             }
             .padding(.top, 20)
- 
+
             Text("Nome da Doença")
                 .font(.title.bold())
- 
+
             TextField("Ex.: Asma, diabetes, dengue...", text: $nomeDoenca)
                 .padding()
                 .background(Color(.systemGray5))
                 .cornerRadius(25)
- 
-            Spacer()
- 
-            Button {
 
+            Spacer()
+
+            Button {
+                irParaProximaTela = true
             } label: {
                 Text("Seguinte")
                     .fontWeight(.semibold)
@@ -50,12 +49,15 @@ struct DoencaFormView: View {
                     .background(Color.green)
                     .cornerRadius(25)
             }
+            .disabled(nomeDoenca.trimmingCharacters(in: .whitespaces).isEmpty)
         }
         .padding()
-       
+        .navigationDestination(isPresented: $irParaProximaTela) {
+            InfodoencaFormView(initialName: nomeDoenca)
+        }
     }
 }
- 
+
 #Preview {
     NavigationStack {
         DoencaFormView()

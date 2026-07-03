@@ -28,10 +28,7 @@ struct MedicamentosFormView: View {
                     Image(systemName: "xmark")
                         .foregroundColor(.black)
                         .padding(12)
-                      //  .background(Circle().fill(Color.white))
                         .glassEffect(.regular.interactive(), in: Circle())
-
-                    
                 
                 }
             }
