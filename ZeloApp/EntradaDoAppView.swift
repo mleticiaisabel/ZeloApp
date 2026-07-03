@@ -99,11 +99,17 @@ struct EntradaDoAppView: View {
                             }
                             Divider()
                             
-                            Button(action: {}) {
-                                Text("+ Adicionar dados pessoais")
-                                    .font(.subheadline)
-                                    .bold()
-                                    .foregroundStyle(.blue)
+                            Button(action: {
+                            mostrarDadosPessoais = true
+                            }) {
+                            Text("+ Adicionar dados pessoais")
+                            .font(.subheadline)
+                            .bold()
+                            .foregroundStyle(.blue)
+                            }
+                            .sheet(isPresented: $mostrarDadosPessoais) {
+                            DadosPessoaisView()
+                            
                             }
                         }
                         .padding()
