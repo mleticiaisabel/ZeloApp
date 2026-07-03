@@ -36,9 +36,8 @@ struct ListDoenca: View {
                 VStack(spacing: 5) {
                     Image(systemName: "cross.case.fill")
                         .resizable()
-                        .frame(width: 20, height: 20, alignment: .center)
+                        .frame(width: 40, height: 40, alignment: .center)
                         .foregroundColor(.orange)
-                        .bold()
                     
                     VStack(spacing: 5) {
                         Text("Ainda não há registros ativos.")

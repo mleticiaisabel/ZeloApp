@@ -36,9 +36,8 @@ struct ListCondicao: View {
                 VStack(spacing: 5) {
                     Image(systemName: "heart.text.square.fill")
                         .resizable()
-                        .frame(width: 20, height: 20, alignment: .center)
+                        .frame(width: 40, height: 40, alignment: .center)
                         .foregroundColor(.brown)
-                        .bold()
                     
                     VStack(spacing: 5) {
                         Text("Ainda não há registros ativos.")

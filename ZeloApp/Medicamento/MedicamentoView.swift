@@ -12,6 +12,7 @@ struct MedicamentoView: View {
     @Environment(\.dismiss) var dismiss
     @State private var nomeMedicamentos: String = ""
     @State private var entrarNaLista = false
+    @State private var irParaProximaTela: Bool = false
     
     var body: some View {
         
@@ -68,10 +69,15 @@ struct MedicamentoView: View {
                     }
                 }
                 .padding(.horizontal, 35)
+                .navigationDestination(isPresented: $irParaProximaTela) {
+                    RemedioFormView(initialName: nomeMedicamentos)
+                }
             }
         }
     }
 }
 #Preview {
-    MedicamentoView()
+    NavigationStack {
+        RemedioFormView()
+    }
 }

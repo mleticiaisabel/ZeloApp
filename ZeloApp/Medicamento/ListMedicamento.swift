@@ -34,11 +34,10 @@ struct ListMedicamento: View {
                 .ignoresSafeArea()
                 
                 VStack(spacing: 5) {
-                    Image(systemName: "cross.case.fill")
+                    Image(systemName: "pills.fill")
                         .resizable()
-                        .frame(width: 20, height: 20, alignment: .center)
+                        .frame(width: 40, height: 40, alignment: .center)
                         .foregroundColor(.indigo)
-                        .bold()
                     
                     VStack(spacing: 5) {
                         Text("Ainda não há registros ativos.")
@@ -62,7 +61,7 @@ struct ListMedicamento: View {
                         
                     }
                     .sheet(isPresented: $showPhotoPicker) {
-                        DoencasView()
+                        RemedioFormView()
                     }
                     
                 }

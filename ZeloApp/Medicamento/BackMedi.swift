@@ -34,6 +34,7 @@ enum FrequenciaMedicamento: String, CaseIterable, Identifiable {
 }
 
 struct RemedioFormModel {
+    var name: String = ""
     var tipo: TipoMedicamento? = nil
     var outroTipo: String = ""
     var dosagem: String = ""
