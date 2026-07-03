@@ -1,4 +1,3 @@
-//
 //  ContentView.swift
 //  ZeloApp
 //  Created by Maria Letícia Isabel Gonçalves  on 25/06/26.
@@ -10,11 +9,6 @@ struct EntradaDoAppView: View {
     
     @State private var temFotoDaCrianca: Bool = false
     @State private var mostrarDadosPessoais: Bool = false
-    
-    // Eu criei esse estado para monitorar qual card o usuário tocou.
-    // Quando ele estiver "vazio" (nil), a minha modal (sheet) fica escondida.
-    // Quando eu coloco uma categoria aqui, o SwiftUI entende que precisa abrir a tela correspondente.
-    @State private var categoriaSelecionada: CategoriaItem?
     
     let columns = [
         GridItem(.flexible(), spacing: 16),
@@ -100,16 +94,15 @@ struct EntradaDoAppView: View {
                             Divider()
                             
                             Button(action: {
-                            mostrarDadosPessoais = true
+                                mostrarDadosPessoais = true
                             }) {
-                            Text("+ Adicionar dados pessoais")
-                            .font(.subheadline)
-                            .bold()
-                            .foregroundStyle(.blue)
+                                Text("+ Adicionar dados pessoais")
+                                    .font(.subheadline)
+                                    .bold()
+                                    .foregroundStyle(.blue)
                             }
                             .sheet(isPresented: $mostrarDadosPessoais) {
-                            DadosPessoaisView()
-                            
+                                DadosPessoaisView()
                             }
                         }
                         .padding()
@@ -126,18 +119,11 @@ struct EntradaDoAppView: View {
                             .padding(.horizontal, 19)
                             .padding(.top, 8)
                         
-                        // No meu grid de Acompanhamento, eu troquei o NavigationLink por um Button comum.
-                        // Eu fiz isso porque o NavigationLink serve para empurrar uma nova tela lateralmente,
-                        // enquanto o Button me dá a liberdade de disparar qualquer ação — que no meu caso,
-                        // é salvar qual card foi clicado para abrir a minha janela modal (sheet).
+                        // Grid de Acompanhamento usando NavigationLink
                         LazyVGrid(columns: columns, spacing: 16) {
                             ForEach(minhasCategorias.prefix(4)) { item in
-                                Button {
-                                    // Aqui eu guardo o item atual que foi clicado. Isso avisa ao SwiftUI que a minha sheet deve abrir.
-                                    categoriaSelecionada = item
-                                } label: {
-                                    VStack(alignment: .leading, spacing: 12)
-                                    {
+                                NavigationLink(destination: viewParaCategoria(item.titulo)) {
+                                    VStack(alignment: .leading, spacing: 12) {
                                         HStack(spacing: 6) {
                                             Image(systemName: item.icone)
                                                 .foregroundStyle(item.corIcone)
@@ -183,13 +169,9 @@ struct EntradaDoAppView: View {
                             .padding(.horizontal, 19)
                             .padding(.top, 12)
                         
-                        // Eu fiz o mesmo processo aqui no card de Emergência.
-                        // Eu mudei para ele deixar de ser um link de navegação padrão e passar a ser um botão interativo.
+                        // Card de Emergência usando NavigationLink
                         if let emergencia = minhasCategorias.last {
-                            Button {
-                                // Ao clicar, eu informo que a categoria de emergência foi selecionada.
-                                categoriaSelecionada = emergencia
-                            } label: {
+                            NavigationLink(destination: viewParaCategoria(emergencia.titulo)) {
                                 VStack(alignment: .leading, spacing: 10) {
                                     HStack(spacing: 6) {
                                         Image(systemName: "pills.fill")
@@ -228,25 +210,6 @@ struct EntradaDoAppView: View {
                         }
                     }
                 }
-                // O meu modificador '.sheet' fica escutando a variável 'categoriaSelecionada' que eu criei.
-                // Assim que ela recebe um valor, a modal desliza para cima.
-                // Eu usei o 'switch' para ler o título da categoria que foi tocada e injetar a View correta lá dentro.
-                .sheet(item: $categoriaSelecionada) { itemSelecionado in
-                    switch itemSelecionado.titulo.uppercased() {
-                    case "MEDICAMENTO":
-                        MedicamentoView()
-                    case "ALERGIA":
-                        AlergiasView()
-                    case "CONDIÇÕES":
-                        CondicoesView()
-                    case "DOENÇAS":
-                        DoencasView()
-                    case "CONTATOS DE EMERGÊNCIAS":
-                        ContatoDeEmergencia()
-                    default:
-                        Text("Página \(itemSelecionado.titulo) não encontrada.")
-                    }
-                }
                 .navigationTitle("Resumo")
                 .navigationBarTitleDisplayMode(.large)
                 .toolbar {
@@ -255,10 +218,28 @@ struct EntradaDoAppView: View {
                             Image(systemName: "square.and.arrow.up")
                                 .foregroundColor(Color.green)
                         }
-
                     }
                 }
             }
+        }
+    }
+    
+    // Função auxiliar para determinar a tela de destino com base no título
+    @ViewBuilder
+    private func viewParaCategoria(_ titulo: String) -> some View {
+        switch titulo.uppercased() {
+        case "MEDICAMENTO":
+            ListMedicamento()
+        case "ALERGIA":
+            ListAlergia()
+        case "CONDIÇÕES":
+            ListCondicao()
+        case "DOENÇAS":
+            ListDoenca()
+        case "CONTATOS DE EMERGÊNCIAS":
+            ListContato()
+        default:
+            Text("Página \(titulo) não encontrada.")
         }
     }
 }
@@ -266,4 +247,3 @@ struct EntradaDoAppView: View {
 #Preview {
     EntradaDoAppView()
 }
-
