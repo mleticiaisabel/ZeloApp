@@ -9,11 +9,16 @@ import SwiftUI
 struct EntradaDoAppView: View {
     
     @State private var temFotoDaCrianca: Bool = false
+    @State private var mostrarDadosPessoais: Bool = false
+    
+    // Eu criei esse estado para monitorar qual card o usuário tocou.
+    // Quando ele estiver "vazio" (nil), a minha modal (sheet) fica escondida.
+    // Quando eu coloco uma categoria aqui, o SwiftUI entende que precisa abrir a tela correspondente.
+    @State private var categoriaSelecionada: CategoriaItem?
     
     let columns = [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
-//  o columns está dizendo para a grade: "Use aquele molde que eu criei ali em cima". botei dois GridItem naquele molde, ou seja, a grade entende automaticamente que deve dividir o espaço da tela em duas colunas de tamanhos iguais (.flexible())
     ]
     
     var body: some View {
@@ -59,7 +64,7 @@ struct EntradaDoAppView: View {
                             .padding(.top, 4)
                         
                         // Card de dados pessoais
-                        VStack(alignment: .leading, spacing: 16) {
+                        VStack(alignment: .leading, spacing: 16){
                             HStack(spacing: 16) {
                                 
                                 if temFotoDaCrianca {
@@ -92,7 +97,6 @@ struct EntradaDoAppView: View {
                                     
                                 }
                             }
-                            
                             Divider()
                             
                             Button(action: {}) {
@@ -109,7 +113,6 @@ struct EntradaDoAppView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
                         .padding(.horizontal, 19)
                         
-                        // TÍTULO DA SEÇÃO DA SAÚDE DA CRIANCINHA
                         Text("Acompanhamento")
                             .font(.title3)
                             .bold()
@@ -117,10 +120,16 @@ struct EntradaDoAppView: View {
                             .padding(.horizontal, 19)
                             .padding(.top, 8)
                         
-                        //  isso daqui é para fazer os cards iguais. A tela EntradaDoApp vai até a lista da tela CategoriaItem e diz: "Pegue apenas os 4 primeiros itens (Medicamento, Alergia, Condições e Doenças) e crie um cartãozinho no grid para cada um". Ele usa o item.icone, item.titulo, etc., para preencher o visual
+                        // No meu grid de Acompanhamento, eu troquei o NavigationLink por um Button comum.
+                        // Eu fiz isso porque o NavigationLink serve para empurrar uma nova tela lateralmente,
+                        // enquanto o Button me dá a liberdade de disparar qualquer ação — que no meu caso,
+                        // é salvar qual card foi clicado para abrir a minha janela modal (sheet).
                         LazyVGrid(columns: columns, spacing: 16) {
                             ForEach(minhasCategorias.prefix(4)) { item in
-                                NavigationLink(value: item.destino) {
+                                Button {
+                                    // Aqui eu guardo o item atual que foi clicado. Isso avisa ao SwiftUI que a minha sheet deve abrir.
+                                    categoriaSelecionada = item
+                                } label: {
                                     VStack(alignment: .leading, spacing: 12)
                                     {
                                         HStack(spacing: 6) {
@@ -157,12 +166,10 @@ struct EntradaDoAppView: View {
                                     .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
                                 }
                                 .buttonStyle(PlainButtonStyle())
-                                // isso daqui remove a cor azul do botao
                             }
                         }
                         .padding(.horizontal, 19)
                         
-                        // SEÇÃO DE EMERGÊNCIA
                         Text("Emergência")
                             .font(.title3)
                             .bold()
@@ -170,16 +177,18 @@ struct EntradaDoAppView: View {
                             .padding(.horizontal, 19)
                             .padding(.top, 12)
                         
-                        // CONTATO DE EMERGÊNCIA
+                        // Eu fiz o mesmo processo aqui no card de Emergência.
+                        // Eu mudei para ele deixar de ser um link de navegação padrão e passar a ser um botão interativo.
                         if let emergencia = minhasCategorias.last {
-                            NavigationLink(value: emergencia.destino) {
+                            Button {
+                                // Ao clicar, eu informo que a categoria de emergência foi selecionada.
+                                categoriaSelecionada = emergencia
+                            } label: {
                                 VStack(alignment: .leading, spacing: 10) {
                                     HStack(spacing: 6) {
-                                        Image(systemName: emergencia.icone)
+                                        Image(systemName: "pills.fill")
                                             .foregroundStyle(emergencia.corIcone)
-                                            .font(.title3)
-                                            .bold()
-                                        
+                                         
                                         Text(emergencia.titulo.uppercased())
                                             .font(.subheadline)
                                             .bold()
@@ -200,8 +209,6 @@ struct EntradaDoAppView: View {
                                         .background(Color.green.opacity(0.12))
                                         .foregroundStyle(.green)
                                         .clipShape(Capsule())
-                                    
-                                    //   para mexer no retangulo de emergencia
                                 }
                                 .padding(16)
                                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -215,6 +222,25 @@ struct EntradaDoAppView: View {
                         }
                     }
                 }
+                // O meu modificador '.sheet' fica escutando a variável 'categoriaSelecionada' que eu criei.
+                // Assim que ela recebe um valor, a modal desliza para cima.
+                // Eu usei o 'switch' para ler o título da categoria que foi tocada e injetar a View correta lá dentro.
+                .sheet(item: $categoriaSelecionada) { itemSelecionado in
+                    switch itemSelecionado.titulo.uppercased() {
+                    case "MEDICAMENTO":
+                        MedicamentoView()
+                    case "ALERGIA":
+                        AlergiasView()
+                    case "CONDIÇÕES":
+                        CondicoesView()
+                    case "DOENÇAS":
+                        DoencasView()
+                    case "CONTATOS DE EMERGÊNCIAS":
+                        ContatoDeEmergencia()
+                    default:
+                        Text("Página \(itemSelecionado.titulo) não encontrada.")
+                    }
+                }
                 .navigationTitle("Resumo")
                 .navigationBarTitleDisplayMode(.large)
                 .toolbar {
@@ -223,25 +249,14 @@ struct EntradaDoAppView: View {
                             Image(systemName: "square.and.arrow.up")
                                 .foregroundColor(Color.green)
                         }
-                        //                .toolbar {
-                        //                    ToolbarItem(placement: .navigationBarTrailing) {
-                        //                        Button {
-                        //                            // COMPARTILHAR
-                        //                        } label: {
-                        //                            Image(systemName: "square.and.arrow.up")
-                        //                                .font(.body)
-                        //                                .bold()
-                        //                                .foregroundStyle(Color.green)
-                        //                                .padding(8)
-                        //                                .background(Color(uiColor: .secondarySystemGroupedBackground))
-                        //                                .clipShape(Circle())
+
                     }
                 }
             }
         }
     }
 }
-//}
+
 #Preview {
     EntradaDoAppView()
 }

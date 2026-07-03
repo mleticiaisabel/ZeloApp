@@ -32,5 +32,5 @@ let minhasCategorias = [
     CategoriaItem(titulo: "Alergia", descricao: "Registre alergias, reações e orientações importantes para o cuidado.", icone: "allergens", corIcone: .red, destino: .alergias),
     CategoriaItem(titulo: "Condições", descricao: "Adicione condições físicas, motoras ou de saúde que mereçam atenção.", icone: "figure.roll", corIcone: .brown, destino: .condicoes),
     CategoriaItem(titulo: "Doenças", descricao: "Se a criança estiver doente, insira aqui o que está havendo...", icone: "thermometer.medium", corIcone: .orange, destino: .doencas),
-    CategoriaItem(titulo: "Contatos de Emergências", descricao: "Cadastre pessoas que podem ser acionadas em situações de emergência.", icone: "sos.circle.fill", corIcone: .red, destino: .contatosdeemergência)
+    CategoriaItem(titulo: "Contatos de Emergências", descricao: "Cadastre pessoas que podem ser acionadas emsituações de emergência.", icone: "sos.circle.fill", corIcone: .red, destino: .contatosdeemergência)
 ]

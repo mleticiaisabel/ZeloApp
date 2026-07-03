@@ -1,5 +1,5 @@
 //
-//  Medicamento.swift
+//  Alergias.swift
 //  ZeloApp
 //
 //  Created by Maria Letícia Isabel Gonçalves  on 26/06/26.
@@ -7,17 +7,17 @@
 
 import SwiftUI
  
-struct MedicamentosFormView: View {
+struct AlergiasView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var nomeMedicamentos: String = ""
+    @State private var nomeAlergias: String = ""
  
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             HStack {
                 Spacer()
-                Image(systemName: "pills.fill")
+                Image(systemName: "allergens")
                     .font(.system(size: 80))
-                    .foregroundColor(.indigo)
+                    .foregroundColor(.red)
                     .padding(20)
                Spacer()
             }
@@ -28,19 +28,15 @@ struct MedicamentosFormView: View {
                     Image(systemName: "xmark")
                         .foregroundColor(.black)
                         .padding(12)
-                      //  .background(Circle().fill(Color.white))
-                        .glassEffect(.regular.interactive(), in: Circle())
-
-                    
-                
+                        .background(Circle().fill(Color.white))
                 }
             }
             .padding(.top, 20)
  
-            Text("Nome do Medicamento")
+            Text("Nome da Alergia")
                 .font(.title.bold())
  
-            TextField("Ex.: Dipirona, insulina, pomada...", text: $nomeMedicamentos)
+            TextField("Ex.: Amendoim, camarão, poeira...", text: $nomeAlergias)
                 .padding()
                 .background(Color(.systemGray5))
                 .cornerRadius(25)
@@ -66,6 +62,6 @@ struct MedicamentosFormView: View {
  
 #Preview {
     NavigationStack {
-        MedicamentosFormView()
+        AlergiasView()
     }
 }

@@ -1,5 +1,5 @@
 //
-//  Alergias.swift
+//  CondicoesMedicas.swift
 //  ZeloApp
 //
 //  Created by Maria Letícia Isabel Gonçalves  on 26/06/26.
@@ -7,17 +7,17 @@
 
 import SwiftUI
  
-struct AlergiasFormView: View {
+struct CondicoesView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var nomeAlergias: String = ""
+    @State private var nomeCondicao: String = ""
  
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             HStack {
                 Spacer()
-                Image(systemName: "allergens")
+                Image(systemName: "brain.filled.head.profile")
                     .font(.system(size: 80))
-                    .foregroundColor(.red)
+                    .foregroundColor(.brown)
                     .padding(20)
                Spacer()
             }
@@ -29,14 +29,16 @@ struct AlergiasFormView: View {
                         .foregroundColor(.black)
                         .padding(12)
                         .background(Circle().fill(Color.white))
+                        .glassEffect(.regular.interactive(), in: Circle())
+
                 }
             }
             .padding(.top, 20)
  
-            Text("Nome da Alergia")
+            Text("Nome da Condição")
                 .font(.title.bold())
  
-            TextField("Ex.: Amendoim, camarão, poeira...", text: $nomeAlergias)
+            TextField("Ex.: Motora, física, mental...", text: $nomeCondicao)
                 .padding()
                 .background(Color(.systemGray5))
                 .cornerRadius(25)
@@ -62,6 +64,6 @@ struct AlergiasFormView: View {
  
 #Preview {
     NavigationStack {
-        AlergiasFormView()
+        CondicoesView()
     }
 }
