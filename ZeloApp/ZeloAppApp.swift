@@ -11,7 +11,7 @@ import SwiftUI
 struct ZeloAppApp: App {
     var body: some Scene {
         WindowGroup {
-            EntradaDoAppView()
+            TelaDeBoasVindas()
         }
     }
 }

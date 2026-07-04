@@ -14,90 +14,90 @@ struct EntradaDoAppView: View {
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
     ]
-
+    
     var body: some View {
         NavigationStack {
             ZStack {
-                       Color(uiColor: .systemGroupedBackground)
-                           .ignoresSafeArea()
-       
-                       VStack {
-                           LinearGradient(
-                               colors: [
-                                   Color.green.opacity(0.60),
-                                   Color.green.opacity(0.09),
-                                   Color(.clear)
-                               ],
-                               startPoint: .top,
-                               endPoint: .bottom
-                           )
-                           .frame(height: 240)
-                           Spacer()
-                       }
-                       .ignoresSafeArea()
+                Color(uiColor: .systemGroupedBackground)
+                    .ignoresSafeArea()
                 
-                        ScrollView {
-                            VStack(alignment: .leading, spacing: 20) {
+                VStack {
+                    LinearGradient(
+                        colors: [
+                            Color.green.opacity(0.60),
+                            Color.green.opacity(0.09),
+                            Color(.clear)
+                        ],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                    .frame(height: 240)
+                    Spacer()
+                }
+                .ignoresSafeArea()
+                
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
+                        
+                        Text(Date(), format: .dateTime.weekday(.wide).day().month(.wide))
+                            .font(.footnote.weight(.semibold))
+                            .foregroundStyle(.secondary)
+                            .environment(\.locale, Locale(identifier: "pt_BR"))
+                            .textCase(.uppercase)
+                            .padding(.horizontal, 19)
+                            .padding(.top, 8)
+                        
+                        Text("Sobre")
+                            .font(.title2.bold())
+                            .foregroundStyle(.primary)
+                            .padding(.horizontal, 19)
+                        
+                        VStack(alignment: .leading, spacing: 16) {
+                            HStack(spacing: 16) {
                                 
-                                Text(Date(), format: .dateTime.weekday(.wide).day().month(.wide))
-                                    .font(.footnote.weight(.semibold))
-                                    .foregroundStyle(.secondary)
-                                    .environment(\.locale, Locale(identifier: "pt_BR"))
-                                    .textCase(.uppercase)
-                                    .padding(.horizontal, 19)
-                                    .padding(.top, 8)
-                                
-                                Text("Sobre")
-                                    .font(.title2.bold())
-                                    .foregroundStyle(.primary)
-                                    .padding(.horizontal, 19)
-                                
-                                VStack(alignment: .leading, spacing: 16) {
-                                    HStack(spacing: 16) {
-                                        
-                                        if temFotoDaCrianca {
-                                            Image("foto_crianca")
-                                                .resizable()
-                                                .scaledToFill()
-                                                .frame(width: 60, height: 60)
-                                                .clipShape(Circle())
-                                        } else {
-                                            Image(systemName: "person.crop.circle.fill")
-                                                .resizable()
-                                                .frame(width: 60, height: 60)
-                                                .foregroundStyle(Color(uiColor: .systemGray3))
-                                        }
-                                        
-                                        VStack(alignment: .leading, spacing: 4) {
-                                            Text("Dados Pessoais da Criança")
-                                                .font(.headline)
-                                                .foregroundStyle(.primary)
-                                            
-                                            Text("Nenhuma informação adicionada.")
-                                                .font(.subheadline)
-                                                .foregroundStyle(.secondary)
-                                        }
-                                    }
-                                    Divider()
-                                    
-                                    Button(action: {
-                                        mostrarDadosPessoais = true
-                                    }) {
-                                        Text("Adicionar dados pessoais")
-                                            .font(.subheadline.bold())
-                                    }
-                                    .sheet(isPresented: $mostrarDadosPessoais) {
-                                        DadosPessoaisView()
-                                    }
+                                if temFotoDaCrianca {
+                                    Image("foto_crianca")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 60, height: 60)
+                                        .clipShape(Circle())
+                                } else {
+                                    Image(systemName: "person.crop.circle.fill")
+                                        .resizable()
+                                        .frame(width: 60, height: 60)
+                                        .foregroundStyle(Color(uiColor: .systemGray3))
                                 }
-                                .padding()
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .background(Color(uiColor: .secondarySystemGroupedBackground))
-                                .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-                                .padding(.horizontal, 19)
                                 
-//        PARTE 2 – SE FREFERE AO ACOMPANHAMENTO
-                                
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("Dados Pessoais da Criança")
+                                        .font(.headline)
+                                        .foregroundStyle(.primary)
+                                    
+                                    Text("Nenhuma informação adicionada.")
+                                        .font(.subheadline)
+                                        .foregroundStyle(.secondary)
+                                }
+                            }
+                            Divider()
+                            
+                            Button(action: {
+                                mostrarDadosPessoais = true
+                            }) {
+                                Text("Adicionar dados pessoais")
+                                    .font(.subheadline.bold())
+                            }
+                            .sheet(isPresented: $mostrarDadosPessoais) {
+                                DadosPessoaisView()
+                            }
+                        }
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(Color(uiColor: .secondarySystemGroupedBackground))
+                        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+                        .padding(.horizontal, 19)
+                        
+                        // SE FREFERE AO ACOMPANHAMENTO
+                        
                         Text("Acompanhamento")
                             .font(.title2)
                             .bold()
@@ -128,7 +128,7 @@ struct EntradaDoAppView: View {
                                             .multilineTextAlignment(.leading)
                                         
                                         Spacer()
-            
+                                        
                                     }
                                     .padding(16)
                                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -149,14 +149,13 @@ struct EntradaDoAppView: View {
                             .padding(.top, 12)
                         
                         // Card de Emergência usando NavigationLink
-                                
                         if let emergencia = minhasCategorias.last {
                             NavigationLink(destination: viewParaCategoria(emergencia.titulo)) {
                                 VStack(alignment: .leading, spacing: 10) {
                                     HStack(spacing: 6) {
                                         Image(systemName: "sos.circle.fill")
                                             .foregroundStyle(emergencia.corIcone)
-                                         
+                                        
                                         Text(emergencia.titulo.uppercased())
                                             .font(.subheadline)
                                             .bold()
@@ -196,7 +195,7 @@ struct EntradaDoAppView: View {
             }
         }
     }
-// com ajuda de ia
+    // com ajuda de ia
     @ViewBuilder
     private func viewParaCategoria(_ titulo: String) -> some View {
         switch titulo.uppercased() {
